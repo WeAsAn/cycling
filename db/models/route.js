@@ -1,7 +1,7 @@
-'use strict';
 const {
-  Model
+  Model,
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Route extends Model {
     /**
@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({User, Comment}) {
+    static associate({ User, Comment }) {
       // define association here
       Route.belongsTo(User, { foreignKey: 'user_id' });
       Route.belongsToMany(User, { through: Comment, foreignKey: 'roure_id', otherKey: 'user_id' });
@@ -25,19 +25,25 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     name: {
-      type: DataTypes.TEXT
+      type: DataTypes.TEXT,
     },
     length: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
     },
     city: {
-      type: DataTypes.TEXT
+      type: DataTypes.TEXT,
     },
     about: {
-      type: DataTypes.TEXT
+      type: DataTypes.TEXT,
+    },
+    start_point: {
+      type: DataTypes.TEXT,
+    },
+    finish_point: {
+      type: DataTypes.TEXT,
     },
     final_rating: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
     },
   }, {
     sequelize,

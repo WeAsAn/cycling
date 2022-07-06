@@ -27,6 +27,12 @@ module.exports = {
       about: {
         type: Sequelize.TEXT
       },
+      start_point:{
+        type: Sequelize.TEXT
+      },
+      finish_point:{
+        type: Sequelize.TEXT
+      },
       final_rating: {
         type: Sequelize.INTEGER
       },
