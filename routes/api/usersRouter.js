@@ -56,3 +56,5 @@ userRouter.get('/logout', (req, res) => {
   res.clearCoockie('user_sid');
   res.redirect('/');
 });
+
+module.exports = userRouter;
