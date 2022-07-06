@@ -16,10 +16,26 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Comment.init({
-    user_id: DataTypes.INTEGER,
-    roure_id: DataTypes.INTEGER,
-    comment: DataTypes.TEXT,
-    rating: DataTypes.INTEGER,
+    user_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Users',
+        key: 'id',
+      },
+    },
+    roure_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Routes',
+        key: 'id',
+      },
+    },
+    comment: {
+      type: DataTypes.TEXT,
+    },
+    rating: {
+      type: DataTypes.INTEGER,
+    },
   }, {
     sequelize,
     modelName: 'Comment',

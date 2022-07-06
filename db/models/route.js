@@ -17,12 +17,28 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Route.init({
-    user_id: DataTypes.INTEGER,
-    name: DataTypes.TEXT,
-    length: DataTypes.INTEGER,
-    city: DataTypes.TEXT,
-    about: DataTypes.TEXT,
-    final_rating: DataTypes.INTEGER
+    user_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Users',
+        key: 'id',
+      },
+    },
+    name: {
+      type: DataTypes.TEXT
+    },
+    length: {
+      type: DataTypes.INTEGER
+    },
+    city: {
+      type: DataTypes.TEXT
+    },
+    about: {
+      type: DataTypes.TEXT
+    },
+    final_rating: {
+      type: DataTypes.INTEGER
+    },
   }, {
     sequelize,
     modelName: 'Route',
