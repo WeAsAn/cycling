@@ -2,9 +2,10 @@
   "name": "cycling",
   "version": "1.0.0",
   "description": "## Звонок от заказчика",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node App.js",
+    "dev": "npx nodemon app.js -e js,jsx"
   },
   "repository": {
     "type": "git",

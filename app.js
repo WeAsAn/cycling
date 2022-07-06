@@ -1,3 +1,4 @@
+require('@babel/register');
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
@@ -5,9 +6,10 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const isAuth = require('./middlewares/isAuth');
+const home_router = require('./pages/home_router');
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT ?? 3000;
 
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
@@ -28,6 +30,8 @@ const sessionConfig = {
 
 app.use(session(sessionConfig));
 app.use(isAuth);
+
+app.use('/home', home_router);
 
 app.listen(PORT, () => {
   console.log(`Сервер работает на ${PORT} порту`);
