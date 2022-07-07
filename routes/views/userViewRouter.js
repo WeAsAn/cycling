@@ -20,7 +20,8 @@ userViewRouter.get('/login', (req, res) => {
 });
 
 userViewRouter.get('/route/new', (req, res) => {
-  const makeroute = React.createElement(MakeRoute);
+  const { user } = req.session;
+  const makeroute = React.createElement(MakeRoute, { user });
   const html = ReactDOMServer.renderToStaticMarkup(makeroute);
   res.write('<!DOCTYPE html>');
   res.end(html);

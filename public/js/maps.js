@@ -1,6 +1,10 @@
 const i = 0;
 let cords = [];
 
+const toNewRoute = () => {
+  window.location = '/new/route';
+};
+
 function makeMap(id, cords) {
   const container = document.querySelector('.container-md');
   const div = document.createElement('div');
@@ -103,7 +107,7 @@ function init() {
   });
   myMap.controls.add(typeSelector).add(zoomControl);
   myMap.geoObjects.add(multiRoute);
-  document.newmap.addEventListener('submit', (event) => {
+  document.newmap.addEventListener('submit', async (event) => {
     event.preventDefault();
     cords = multiRoute.properties._data.waypoints.map((obj) => obj.coordinates);
     // const mapURL = `https://yandex.ru/maps/?rtext=${cords
@@ -111,7 +115,7 @@ function init() {
     //   .join('~')}&rtt=bc`;
     // console.log(mapURL);
     console.log(cords);
-    const result = fetch('/new/route', {
+    const result = await fetch('/new/route', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -124,7 +128,11 @@ function init() {
         start_poin: cords,
       }),
     });
-    console.log(multiRoute.properties);
+    const res = await result.json();
+    console.log(res);
+    if (res.status === 'vse ok') {
+      window.location = '/home';
+    }
   });
   // myMap.behaviors.disable('drag'); убрать движение
   // document.location.hash = '&ll=' + centerURL.toString() + '&z=' + zoomURL.toString();

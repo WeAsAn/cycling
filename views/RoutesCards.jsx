@@ -1,9 +1,9 @@
 const React = require('react');
 const Layout = require('./Layout');
 
-module.exports = function RoutesCard({ routeid, comments }) {
+module.exports = function RoutesCard({ routeid, comments, user }) {
   return (
-    <Layout>
+    <Layout user={user}>
       <h1>
         Вело Маршрут
       </h1>

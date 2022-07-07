@@ -4,7 +4,7 @@ const Layout = require('./Layout');
 
 module.exports = function Profile({ user, routes }) {
   return (
-    <Layout>
+    <Layout user={user}>
       <div className="container">
         <h1>Моя страница</h1>
         <div>
@@ -19,13 +19,15 @@ module.exports = function Profile({ user, routes }) {
           </h3>
           <div>
             <h3>Мои маршруты: </h3>
-            {routes.map((route) => <a href={`/routes/${route.id}`}>{route.name}</a>)}
+            <ul>
+              {routes.map((route) => <li><a href={`/route/${route.id}`}>{route.name}</a></li>)}
+            </ul>
           </div>
           <h1 />
-          <h3><button>Добавить маршрут</button></h3>
+          <h3><a href="/route/new">Добавить маршрут</a></h3>
         </div>
       </div>
     </Layout>
-    
+
   );
 };

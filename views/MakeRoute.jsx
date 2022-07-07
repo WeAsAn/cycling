@@ -1,10 +1,10 @@
 const React = require('react');
 const Layout = require('./Layout');
 
-module.exports = function MakeRout({}) {
+module.exports = function MakeRout({user}) {
   const styles = { width: '600px', height: '400px' };
   return (
-    <Layout>
+    <Layout user={user}>
       <div className="container-sm">
         <div id="constructor" style={styles} className=".img-fluid" />
         <form action="post" name="newmap">
