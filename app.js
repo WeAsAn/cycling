@@ -1,4 +1,5 @@
 require('@babel/register');
+
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
@@ -10,6 +11,7 @@ const homeRouter = require('./routes/views/homeRouter');
 const userRouter = require('./routes/api/usersRouter');
 const userViewRouter = require('./routes/views/userViewRouter');
 const index = require('./routes/views/index');
+const { sequelize } = require('./db/models');
 
 const app = express();
 const PORT = process.env.PORT ?? 3000;
@@ -37,8 +39,9 @@ app.use(isAuth);
 app.use('/', index);
 app.use('/home', homeRouter);
 app.use('/new', userRouter);
-app.use('/lg', userViewRouter);
+app.use('/', userViewRouter);
 
 app.listen(PORT, () => {
   console.log(`Сервер работает на ${PORT} порту`);
+  sequelize.authenticate();
 });

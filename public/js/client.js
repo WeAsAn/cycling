@@ -1,8 +1,11 @@
+// const rega = document.querySelector('.registration')
+
+// console.log(rega);
 document.registration?.addEventListener('submit', async (event) => {
-    
   event.preventDefault();
+  console.log(event.target);
   console.log(event.target.inputemail.value);
-  if (event.target.inputpassword.value.length >= 7) {
+  if (event.target.inputpassword.value.length > 7) {
     const res = await fetch('/new/registration', {
       method: 'POST',
       headers: {
@@ -17,7 +20,7 @@ document.registration?.addEventListener('submit', async (event) => {
     const result = await res.json();
     console.log(result, 'nnam prishel otvet');
     if (result.status === 'ok') {
-      window.location = '/entries';
+      window.location = '/home';
     } else {
       document.querySelector('.errorMessage').innerText = result.errorMessage;
     }
@@ -42,7 +45,7 @@ document.login?.addEventListener('submit', async (event) => {
   const result = await res.json();
   console.log(result);
   if (result.status === 'ok') {
-    window.location.assign('/entries');
+    window.location.assign('/home');
   } else {
     document.querySelector('.errorMessage').innerText = result.errorMessage;
   }
