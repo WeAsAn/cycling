@@ -60,4 +60,8 @@ userRouter.get('/logout', async (req, res) => {
   res.redirect('/');
 });
 
+userRouter.post('/route', async (req, res) => {
+  console.log(req.body);
+});
+
 module.exports = userRouter;

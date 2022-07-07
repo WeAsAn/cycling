@@ -1,4 +1,36 @@
-//       center: [59.938879, 30.315212],
+const i = 0;
+let cords = [];
+
+function makeMap(id, cords) {
+  const container = document.querySelector('#center');
+  const div = document.createElement('div');
+  div.setAttribute('id', `map${id}`);
+  div.setAttribute('class', 'maps');
+  container.appendChild(div);
+  const myMap = new ymaps.Map(`map${id}`, {
+    center: [59.938879, 30.315212],
+    zoom: 10,
+  });
+  const multiRoute = new ymaps.multiRouter.MultiRoute(
+    {
+      referencePoints: cords,
+      params: {
+        editorMidPointsType: 'via',
+        routingMode: 'bicycle',
+        editorDrawOver: true,
+      },
+    },
+    {
+      boundsAutoApply: true,
+    },
+  );
+  multiRoute.model.setParams({
+    routingMode: 'bicycle',
+  });
+  myMap.behaviors.disable('drag');
+  myMap.geoObjects.add(multiRoute);
+}
+
 function init() {
   const multiRoute = new ymaps.multiRouter.MultiRoute(
     {
@@ -25,7 +57,7 @@ function init() {
       size: 'small',
     },
   });
-  let typeSelector = new ymaps.control.TypeSelector({
+  const typeSelector = new ymaps.control.TypeSelector({
     data: { content: 'Вид' },
   });
 
@@ -43,7 +75,7 @@ function init() {
   });
 
   const myMap = new ymaps.Map(
-    'map',
+    'constructor',
     {
       center: [59.938879, 30.315212],
       zoom: 12,
@@ -55,7 +87,7 @@ function init() {
   );
   multiRoute.model.events.add('requestsuccess', () => {
     const activeRoute = multiRoute.getActiveRoute();
-    console.log(`Длина: ${(activeRoute.properties.get('distance').value / 1000).toFixed(1)}`);
+    console.log((activeRoute.properties.get('distance').value / 1000).toFixed(1));
     if (activeRoute.properties.get('blocked')) {
       console.log('На маршруте имеются участки с перекрытыми дорогами.');
     }
@@ -70,19 +102,18 @@ function init() {
   });
   myMap.controls.add(typeSelector).add(zoomControl);
   myMap.geoObjects.add(multiRoute);
-  document.querySelector('button').addEventListener('click', (event) => {
+  document.querySelector('.btn').addEventListener('click', (event) => {
     event.preventDefault();
-    console.log(111);
-    // let cords = multiRoute.properties._data.waypoints
-    //   .map((obj) => obj.coordinates)
-    //   .map((arr) => arr.reverse().join(','))
-    //   .join('~');
-    const cords = multiRoute.properties._data.waypoints.map((obj) => obj.coordinates);
-    const mapURL = `https://yandex.ru/maps/?rtext=${cords}&rtt=bc`;
+    cords = multiRoute.properties._data.waypoints.map((obj) => obj.coordinates);
+    const mapURL = `https://yandex.ru/maps/?rtext=${cords
+      .map((arr) => arr.reverse().join(','))
+      .join('~')}&rtt=bc`;
     console.log(mapURL);
     console.log(cords);
+    makeMap(1, cords);
   });
   // myMap.behaviors.disable('drag'); убрать движение
   // document.location.hash = '&ll=' + centerURL.toString() + '&z=' + zoomURL.toString();
 }
+
 ymaps.ready(init);

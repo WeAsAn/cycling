@@ -3,6 +3,7 @@ const React = require('react');
 const ReactDOMServer = require('react-dom/server');
 const Registration = require('../../views/Registration');
 const Login = require('../../views/Login');
+const MakeRoute = require('../../views/MakeRoute');
 
 userViewRouter.get('/registration', (req, res) => {
   const regform = React.createElement(Registration);
@@ -18,4 +19,11 @@ userViewRouter.get('/login', (req, res) => {
   res.end(html);
 });
 
-module.exports = userViewRouter
+userViewRouter.get('/route/new', (req, res) => {
+  const makeroute = React.createElement(MakeRoute);
+  const html = ReactDOMServer.renderToStaticMarkup(makeroute);
+  res.write('<!DOCTYPE html>');
+  res.end(html);
+});
+
+module.exports = userViewRouter;
