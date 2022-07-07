@@ -5,7 +5,6 @@ module.exports = function Login() {
   return (
     <Layout title="Login">
       <h1>
-        Вход
       </h1>
       <form name="login" method="POST" action="/home">
         <label htmlFor="inputemail" className="block mar-b-1">Email:</label>
