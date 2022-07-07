@@ -3,7 +3,7 @@ const React = require('react');
 module.exports = function NewLout({ user }) {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <a className="navbar-brand" href="/home">Cycle Big Trip </a>
+      <a className="navbar-brand" href="/home">Ride Me </a>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon" />
       </button>

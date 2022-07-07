@@ -36,7 +36,8 @@ module.exports = function Route({ routes }) {
               {' '}
               {el.User.login}
             </p>
-            <a href={`/routes/${el.id}`} className="btn btn-primary">Подробнее о маршруте</a>
+            <a href={`/routes/${el.id}`} className="btn btn-outline-dark">Подробнее о маршруте</a>
+            {/* <a href={`/routes/${el.id}/comment`} className="btn btn-outline-dark">Оставить комментарий</a> */}
           </div>
         </div>
       ))}
