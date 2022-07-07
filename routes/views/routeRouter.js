@@ -4,13 +4,16 @@ const ReactDOMServer = require('react-dom/server');
 const Layout = require('../../views/Layout');
 const Routesviews = require('../../views/Routesviews.jsx');
 const RoutesCards = require('../../views/RoutesCards');
-const { Route, User } = require('../../db/models');
+const { Route, User, Comment } = require('../../db/models');
 
 routeRouter.get('/', async (req, res) => {
   // const entries = await Route.findAll({ order: [['id', 'DESC']] });
   const routes = await Route.findAll({
     raw: true,
     nest: true,
+    order: [
+      ['final_rating', 'DESC'],
+    ],
     include: [{ model: User }],
   });
   //   const ng = User.login
@@ -23,16 +26,31 @@ routeRouter.get('/', async (req, res) => {
 });
 
 routeRouter.get('/:id', async (req, res) => {
-console.log(req.params.id);
-  const routeid = await Route.findOne({ where: { id: req.params.id },
+  console.log(req.params.id);
+  const routeid = await Route.findOne({
+    where: { id: req.params.id },
     raw: true,
     nest: true,
-    include: [{ model: User }] });
-  console.log(routeid);
-//   console.log(routeid.name);
-  const showRoute = React.createElement(RoutesCards, { routeid });
+    // include: [{ model: User }, { model: Comment }],
+    include: [{ model: User }],
+
+  });
+//   console.log(routeid);
+  const comments = await Comment.findAll({
+    where: { roure_id: req.params.id },
+    raw: true,
+    nest: true,
+    // include: [{ model: User }, { model: Comment }],
+    include: [{ model: User }, { model: Route }],
+  });
+//   console.log(comments);
+
+  //   console.log(routeid.name);
+  const showRoute = React.createElement(RoutesCards, { routeid, comments });
   const html = ReactDOMServer.renderToStaticMarkup(showRoute);
   res.write('<!DOCTYPE html>');
   res.end(html);
 });
+
+
 module.exports = routeRouter;
