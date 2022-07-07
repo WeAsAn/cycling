@@ -46,8 +46,7 @@ userRouter.post('/login', async (req, res) => {
       res.json({ status: 'notok', errorMessage: 'Неверный логин/пароль' });
       return;
     }
-    // const { id, login } = user;
-    // const userSesion = { id, login };
+  
     req.session.user = user;
     res.json({ status: 'ok' });
   } catch (err) {
@@ -60,6 +59,7 @@ userRouter.get('/logout', async (req, res) => {
   res.clearCookie('u_sid');
   res.redirect('/');
 });
+
 
 userRouter.post('/route', async (req, res) => {
   console.log(req.body);

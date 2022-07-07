@@ -13,6 +13,10 @@ const userViewRouter = require('./routes/views/userViewRouter');
 const index = require('./routes/views/index');
 const { sequelize } = require('./db/models');
 
+const profileRouter = require('./routes/views/profileRouter');
+
+const routeRouter = require('./routes/views/routeRouter');
+
 const app = express();
 const PORT = process.env.PORT ?? 3000;
 
@@ -34,13 +38,14 @@ const sessionConfig = {
 };
 
 app.use(session(sessionConfig));
-app.use(isAuth);
+app.use(isAuth); // из локальной переменной делает глобальную
 
 app.use('/', index);
 app.use('/home', homeRouter);
 app.use('/new', userRouter);
 app.use('/', userViewRouter);
-
+app.use('/profile', profileRouter);
+app.use('/routes', routeRouter);
 app.listen(PORT, () => {
   console.log(`Сервер работает на ${PORT} порту`);
   sequelize.authenticate();

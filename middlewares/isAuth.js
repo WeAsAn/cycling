@@ -4,5 +4,6 @@ function isAuth(req, res, next) {
   }
   next();
 }
+// из локальной переменной делает глобальную
 
 module.exports = isAuth;
