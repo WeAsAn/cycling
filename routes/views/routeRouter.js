@@ -3,6 +3,7 @@ const React = require('react');
 const ReactDOMServer = require('react-dom/server');
 const Layout = require('../../views/Layout');
 const Routesviews = require('../../views/Routesviews.jsx');
+const RoutesCards = require('../../views/RoutesCards');
 const { Route, User } = require('../../db/models');
 
 routeRouter.get('/', async (req, res) => {
@@ -12,13 +13,26 @@ routeRouter.get('/', async (req, res) => {
     nest: true,
     include: [{ model: User }],
   });
-//   const ng = User.login
-//   console.log(routes[0].User.login);
-//   console.log(user[0].login);
+  //   const ng = User.login
+  //   console.log(routes[0].User.login);
+  //   console.log(user[0].login);
   const route = React.createElement(Routesviews, { routes });
   const html = ReactDOMServer.renderToStaticMarkup(route);
   res.write('<!doctype html>');
   res.end(html);
 });
 
+routeRouter.get('/:id', async (req, res) => {
+console.log(req.params.id);
+  const routeid = await Route.findOne({ where: { id: req.params.id },
+    raw: true,
+    nest: true,
+    include: [{ model: User }] });
+  console.log(routeid);
+//   console.log(routeid.name);
+  const showRoute = React.createElement(RoutesCards, { routeid });
+  const html = ReactDOMServer.renderToStaticMarkup(showRoute);
+  res.write('<!DOCTYPE html>');
+  res.end(html);
+});
 module.exports = routeRouter;
