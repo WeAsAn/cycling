@@ -1,6 +1,7 @@
 const userRouter = require('express').Router();
 const bcrypt = require('bcrypt');
-const { User } = require('../../db/models');
+const { Router } = require('express');
+const { User, Route } = require('../../db/models');
 
 userRouter.post('/registration', async (req, res) => {
   try {
@@ -57,6 +58,20 @@ userRouter.get('/logout', async (req, res) => {
   req.session.destroy();
   res.clearCookie('u_sid');
   res.redirect('/');
+});
+
+
+userRouter.post('/route', async (req, res) => {
+  console.log(req.body);
+  const { name, length, info, city, start_point } = req.body;
+  await Route.create({
+    name,
+    length,
+    city,
+    start_point,
+    info,
+    user_id: req.session.user.id,
+  });
 });
 
 module.exports = userRouter;
