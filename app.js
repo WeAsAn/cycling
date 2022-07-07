@@ -12,6 +12,7 @@ const userRouter = require('./routes/api/usersRouter');
 const userViewRouter = require('./routes/views/userViewRouter');
 const index = require('./routes/views/index');
 const { sequelize } = require('./db/models');
+const profileRouter = require('./routes/views/profileRouter');
 
 const app = express();
 const PORT = process.env.PORT ?? 3000;
@@ -40,7 +41,7 @@ app.use('/', index);
 app.use('/home', homeRouter);
 app.use('/new', userRouter);
 app.use('/', userViewRouter);
-
+app.use('/profile', profileRouter);
 app.listen(PORT, () => {
   console.log(`Сервер работает на ${PORT} порту`);
   sequelize.authenticate();
