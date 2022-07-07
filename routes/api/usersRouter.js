@@ -45,8 +45,7 @@ userRouter.post('/login', async (req, res) => {
       res.json({ status: 'notok', errorMessage: 'Неверный логин/пароль' });
       return;
     }
-    // const { id, login } = user;
-    // const userSesion = { id, login };
+  
     req.session.user = user;
     res.json({ status: 'ok' });
   } catch (err) {

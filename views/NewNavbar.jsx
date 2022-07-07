@@ -18,7 +18,7 @@ module.exports = function NewLout({ user }) {
                 <a className="nav-link" href="/routes">Маршруты</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/lg/registration">Личный кабинет</a>
+                <a className="nav-link" href="/profile">Личный кабинет</a>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="/new/logout">Выход</a>
