@@ -40,7 +40,7 @@ userRouter.post('/login', async (req, res) => {
       res.json({ status: 'notok', errorMessage: 'Такого пользователя не существует!' });
       return;
     }
-    const userOk = bcrypt.compare(password, user.password);
+    const userOk = await bcrypt.compare(password, user.password);
     if (!userOk) {
       res.json({ status: 'notok', errorMessage: 'Неверный логин/пароль' });
       return;
