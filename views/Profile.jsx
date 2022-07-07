@@ -26,5 +26,6 @@ module.exports = function Profile({ user, routes }) {
         </div>
       </div>
     </Layout>
+    
   );
 };

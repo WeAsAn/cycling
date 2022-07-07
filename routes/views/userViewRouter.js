@@ -18,4 +18,4 @@ userViewRouter.get('/login', (req, res) => {
   res.end(html);
 });
 
-module.exports = userViewRouter
+module.exports = userViewRouter;

@@ -14,6 +14,7 @@ const index = require('./routes/views/index');
 const { sequelize } = require('./db/models');
 const profileRouter = require('./routes/views/profileRouter');
 
+
 const app = express();
 const PORT = process.env.PORT ?? 3000;
 
