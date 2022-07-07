@@ -2,11 +2,11 @@ const i = 0;
 let cords = [];
 
 function makeMap(id, cords) {
-  const container = document.querySelector('#center');
+  const container = document.querySelector('.container-md');
   const div = document.createElement('div');
   div.setAttribute('id', `map${id}`);
   div.setAttribute('class', 'maps');
-  container.appendChild(div);
+  container.append(div);
   const myMap = new ymaps.Map(`map${id}`, {
     center: [59.938879, 30.315212],
     zoom: 10,
@@ -85,9 +85,10 @@ function init() {
       buttonMaxWidth: 300,
     },
   );
+  let length = 0;
   multiRoute.model.events.add('requestsuccess', () => {
     const activeRoute = multiRoute.getActiveRoute();
-    console.log((activeRoute.properties.get('distance').value / 1000).toFixed(1));
+    length = (activeRoute.properties.get('distance').value / 1000).toFixed();
     if (activeRoute.properties.get('blocked')) {
       console.log('На маршруте имеются участки с перекрытыми дорогами.');
     }
@@ -102,15 +103,28 @@ function init() {
   });
   myMap.controls.add(typeSelector).add(zoomControl);
   myMap.geoObjects.add(multiRoute);
-  document.querySelector('.btn').addEventListener('click', (event) => {
+  document.newmap.addEventListener('submit', (event) => {
     event.preventDefault();
     cords = multiRoute.properties._data.waypoints.map((obj) => obj.coordinates);
-    const mapURL = `https://yandex.ru/maps/?rtext=${cords
-      .map((arr) => arr.reverse().join(','))
-      .join('~')}&rtt=bc`;
-    console.log(mapURL);
+    // const mapURL = `https://yandex.ru/maps/?rtext=${cords
+    //   .map((arr) => arr.reverse().join(','))
+    //   .join('~')}&rtt=bc`;
+    // console.log(mapURL);
     console.log(cords);
-    makeMap(1, cords);
+    const result = fetch('/new/route', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: event.target.name.value,
+        about: event.target.info.value,
+        length,
+        city: event.target.city.value,
+        start_poin: cords,
+      }),
+    });
+    console.log(multiRoute.properties);
   });
   // myMap.behaviors.disable('drag'); убрать движение
   // document.location.hash = '&ll=' + centerURL.toString() + '&z=' + zoomURL.toString();
