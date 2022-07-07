@@ -10,3 +10,9 @@ header
   position: absolute;
   top: 40px;
 }
+.navbar-collapse {
+  flex-basis: 100%;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: flex-end;
+}

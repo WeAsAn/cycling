@@ -17,3 +17,5 @@ userViewRouter.get('/login', (req, res) => {
   res.write('<!DOCTYPE html>');
   res.end(html);
 });
+
+module.exports = userViewRouter

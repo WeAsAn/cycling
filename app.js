@@ -1,4 +1,5 @@
 require('@babel/register');
+
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
@@ -6,7 +7,11 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const isAuth = require('./middlewares/isAuth');
-const home_router = require('./pages/home_router');
+const homeRouter = require('./routes/views/homeRouter');
+const userRouter = require('./routes/api/usersRouter');
+const userViewRouter = require('./routes/views/userViewRouter');
+const index = require('./routes/views/index');
+const { sequelize } = require('./db/models');
 
 const app = express();
 const PORT = process.env.PORT ?? 3000;
@@ -31,8 +36,12 @@ const sessionConfig = {
 app.use(session(sessionConfig));
 app.use(isAuth);
 
-app.use('/home', home_router);
+app.use('/', index);
+app.use('/home', homeRouter);
+app.use('/new', userRouter);
+app.use('/', userViewRouter);
 
 app.listen(PORT, () => {
   console.log(`Сервер работает на ${PORT} порту`);
+  sequelize.authenticate();
 });
