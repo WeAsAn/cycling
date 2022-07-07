@@ -12,10 +12,10 @@ module.exports = function NewLout({ user }) {
           {user && user ? (
             <>
               <li className="nav-item">
-                <a className="nav-link" href="#">{user.login}</a>
+                <a className="nav-link" href="#"> Привет, {user.login}</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/lg/registration">Маршруты</a>
+                <a className="nav-link" href="/routes">Маршруты</a>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="/profile">Личный кабинет</a>
@@ -28,7 +28,7 @@ module.exports = function NewLout({ user }) {
             : (
               <>
                 <li className="nav-item">
-                  <a className="nav-link" href="/lg/registration">Маршруты</a>
+                  <a className="nav-link" href="/routes">Маршруты</a>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="/registration">Регистрация</a>
