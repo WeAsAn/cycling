@@ -51,6 +51,16 @@ document.login?.addEventListener('submit', async (event) => {
   }
 });
 
+document.getElementsByName('deleteComment').addEventListener('click', async (event) => {
+  event.preventDefault();
+  const res = await fetch('/routes/:id', {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  if (res.status === 'ok') {
+    document.querySelector('.deleteComment').closest('.card-body').remove();
 console.log(document.mycomment);
 // const comm = document.mycomment
 // комментарий
