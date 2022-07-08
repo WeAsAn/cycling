@@ -13,11 +13,13 @@ CommentRouter.get('/:id', (req, res) => {
 });
 
 CommentRouter.delete('/:id', async (req, res) => {
-  const { id: user_id } = req.params;
-  await Comment.destroy({ where: { id: user_id } });
-  res
-
-
+  try {
+    const { id: user_id } = req.params;
+    await Comment.destroy({ where: { id: user_id } });
+    res.status(204).json({ status: 'ok' });
+  } catch (err) {
+    res.status(500).json({ errorText: 'not today' });
+  }
 });
 
 module.exports = CommentRouter;

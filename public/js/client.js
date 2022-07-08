@@ -51,7 +51,7 @@ document.login?.addEventListener('submit', async (event) => {
   }
 });
 
-document.querySelector('.deleteComment').addEventListener('click', async (event) => {
+document.getElementsByName('deleteComment').addEventListener('click', async (event) => {
   event.preventDefault();
   const res = await fetch('/routes/:id', {
     method: 'DELETE',
@@ -59,5 +59,7 @@ document.querySelector('.deleteComment').addEventListener('click', async (event)
       'Content-Type': 'application/json',
     },
   });
-  
+  if (res.status === 'ok') {
+    document.querySelector('.deleteComment').closest('.card-body').remove();
+  }
 });
