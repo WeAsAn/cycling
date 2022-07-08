@@ -50,3 +50,30 @@ document.login?.addEventListener('submit', async (event) => {
     document.querySelector('.errorMessage').innerText = result.errorMessage;
   }
 });
+
+console.log(document.mycomment);
+// const comm = document.mycomment
+// комментарий
+document.mycomment?.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  console.log(event.target.inputcomment.value);
+  console.log(event.target.querySelector('.nav-link').innerText);
+  console.log(event.target.rating.value);
+  // const res = await fetch('/new/', {
+  //   method: 'POST',
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //   },
+  //   body: JSON.stringify({
+  //     email: event.target.inputemail.value,
+  //     password: event.target.inputpassword.value,
+  //   }),
+  // });
+  // const result = await res.json();
+  // console.log(result);
+  // if (result.status === 'ok') {
+  //   window.location.assign('/home');
+  // } else {
+  //   document.querySelector('.errorMessage').innerText = result.errorMessage;
+  // }
+});

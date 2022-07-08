@@ -1,9 +1,9 @@
 const React = require('react');
 const Layout = require('./Layout');
 
-module.exports = function RoutesCard({ routeid, comments }) {
+module.exports = function RoutesCard({ routeid, comments, user }) {
   return (
-    <Layout>
+    <Layout user={user}>
       <h1>
         Вело Маршрут
       </h1>
@@ -42,7 +42,9 @@ module.exports = function RoutesCard({ routeid, comments }) {
               {routeid.about}
             </p>
             <a href="/routes/" className="btn btn-outline-dark">Назад</a>
-            <a href={`/routes/comment/${routeid.id}`} className="btn btn-outline-dark">Оставить комментарий</a>
+            {user && user ? 
+            (<a href={`/routes/comment/${routeid.id}`} className="btn btn-outline-dark">Оставить комментарий</a>)
+            : (<></>)}
           </div>
         </div>
       </div>
