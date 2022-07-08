@@ -1,13 +1,13 @@
 const React = require('react');
 const Layout = require('./Layout');
 
-module.exports = function Comment({ user }) {
+module.exports = function Comment({ user,routeId }) {
   return (
     <Layout user={user}>
       <h1>
         Оставьте комментарий
       </h1>
-      <form className="mycomment" name="mycomment">
+      <form className="mycomment" name="mycomment" id={routeId.id}>
         <label htmlFor="llogin"  className="block mar-b-1">
           Login:
           <span className="nav-link" name="llogin">
