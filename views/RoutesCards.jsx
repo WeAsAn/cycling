@@ -42,7 +42,9 @@ module.exports = function RoutesCard({ routeid, comments, user }) {
               {routeid.about}
             </p>
             <a href="/routes/" className="btn btn-outline-dark">Назад</a>
-            <a href={`/routes/comment/${routeid.id}`} className="btn btn-outline-dark">Оставить комментарий</a>
+            {user && user ? 
+            (<a href={`/routes/comment/${routeid.id}`} className="btn btn-outline-dark">Оставить комментарий</a>)
+            : (<></>)}
           </div>
         </div>
       </div>
