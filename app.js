@@ -12,6 +12,9 @@ const userRouter = require('./routes/api/usersRouter');
 const userViewRouter = require('./routes/views/userViewRouter');
 const index = require('./routes/views/index');
 const { sequelize } = require('./db/models');
+
+const profileRouter = require('./routes/views/profileRouter');
+
 const routeRouter = require('./routes/views/routeRouter');
 const CommentRouter = require('./routes/views/CommentRouter');
 
@@ -42,6 +45,7 @@ app.use('/', index);
 app.use('/home', homeRouter);
 app.use('/new', userRouter);
 app.use('/', userViewRouter);
+app.use('/profile', profileRouter);
 app.use('/routes', routeRouter);
 app.use('/routes/comment/', CommentRouter)
 

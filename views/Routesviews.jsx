@@ -2,9 +2,9 @@ const React = require('react');
 const { route } = require('../routes/views');
 const Layout = require('./Layout');
 
-module.exports = function Route({ routes }) {
+module.exports = function Route({ routes, user }) {
   return (
-    <Layout>
+    <Layout user={user}>
       { routes.map((el) => (
         <div className="card" key={el.id}>
           <div className="card-header">
