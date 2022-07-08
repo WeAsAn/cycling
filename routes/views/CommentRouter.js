@@ -13,7 +13,5 @@ CommentRouter.get('/:id', (req, res) => {
     const html = ReactDOMServer.renderToStaticMarkup(com);
     res.write('<!doctype html>');
     res.end(html);
-  })
-  
-  
+  })  
   module.exports = CommentRouter;
