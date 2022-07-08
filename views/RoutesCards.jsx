@@ -28,7 +28,7 @@ module.exports = function RoutesCard({ routeid, comments, user }) {
             <p className="card-text">
               Рейтинг:
               {' '}
-              {routeid.final_rating}
+              {(routeid.check_rating) / routeid.counter }
             </p>
             <p className="card-text">
               Автор маршрута:

@@ -62,7 +62,9 @@ userRouter.get('/logout', async (req, res) => {
 
 userRouter.post('/route', async (req, res) => {
   console.log(req.body);
-  const { name, length, info, city, start_point } = req.body;
+  const {
+    name, length, info, city, start_point,
+  } = req.body;
   await Route.create({
     name,
     length,
@@ -77,14 +79,41 @@ userRouter.post('/route', async (req, res) => {
 userRouter.post('/addcomment', async (req, res) => {
   console.log(req.body);
   const { roure_id, comment, rating } = req.body;
-  await Comment.create({
+  const newCom = await Comment.create({
     user_id: req.session.user.id,
-    roure_id, 
-    comment, 
+    roure_id,
+    comment,
     rating,
   });
+  const findNewRat = await Route.findOne({
+    where: { id: roure_id },
+  });
+  // console.log(findNewRat);
+  // findNewRat.check_rating += rating;
+  // findNewRat.counter += 1;
+  // console.log(findNewRat.check_rating);
+  // console.log(findNewRat.counter);
+  // typeof(findNewRat.check_rating);
+  const newR = +rating;
+  await findNewRat.update({
+    counter: findNewRat.counter + 1,
+    check_rating: findNewRat.check_rating + newR,
+  });
+  await findNewRat.save();
+
+  // const routeid = await Route.findOne({
+  //   where: { id: req.params.id },
+  //   raw: true,
+  //   nest: true,
+  //   // include: [{ model: User }, { model: Comment }],
+  //   include: [{ model: User }],
+  // });
+
+  // const newRat  = await Route.update({
+
+  // })
+
   res.json({ status: 'ok' });
 });
-
 
 module.exports = userRouter;
