@@ -68,6 +68,8 @@ module.exports = function RoutesCard({ routeid, comments, user }) {
                 {' '}
                 {el.comment}
               </p>
+              <br />
+                  <button className="btn btn-outline-dark" name='deleteComment'>Удалить</button>
             </div>
           ))
 }

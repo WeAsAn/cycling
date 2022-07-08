@@ -50,3 +50,14 @@ document.login?.addEventListener('submit', async (event) => {
     document.querySelector('.errorMessage').innerText = result.errorMessage;
   }
 });
+
+document.querySelector('.deleteComment').addEventListener('click', async (event) => {
+  event.preventDefault();
+  const res = await fetch('/routes/:id', {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  
+});
