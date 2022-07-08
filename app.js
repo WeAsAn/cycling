@@ -13,6 +13,7 @@ const userViewRouter = require('./routes/views/userViewRouter');
 const index = require('./routes/views/index');
 const { sequelize } = require('./db/models');
 const routeRouter = require('./routes/views/routeRouter');
+const CommentRouter = require('./routes/views/CommentRouter');
 
 const app = express();
 const PORT = process.env.PORT ?? 3000;
@@ -42,6 +43,7 @@ app.use('/home', homeRouter);
 app.use('/new', userRouter);
 app.use('/', userViewRouter);
 app.use('/routes', routeRouter);
+app.use('/routes/comment/', CommentRouter)
 
 app.listen(PORT, () => {
   console.log(`Сервер работает на ${PORT} порту`);

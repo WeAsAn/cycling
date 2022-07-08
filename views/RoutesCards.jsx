@@ -42,7 +42,7 @@ module.exports = function RoutesCard({ routeid, comments }) {
               {routeid.about}
             </p>
             <a href="/routes/" className="btn btn-outline-dark">Назад</a>
-            <a href={`/routes/${routeid.id}/comment`} className="btn btn-outline-dark">Оставить комментарий</a>
+            <a href={`/routes/comment/${routeid.id}`} className="btn btn-outline-dark">Оставить комментарий</a>
           </div>
         </div>
       </div>
