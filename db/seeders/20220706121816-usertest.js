@@ -3,7 +3,7 @@ module.exports = {
     const arr = [
       {
         login: 'Admin',
-        password: 'qwertyu',
+        password: '12345678',
         email: 'admin@email.com',
         createdAt: new Date(),
         updatedAt: new Date(),

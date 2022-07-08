@@ -42,8 +42,20 @@ module.exports = (sequelize, DataTypes) => {
     finish_point: {
       type: DataTypes.TEXT,
     },
+    coordinates: {
+      type: DataTypes.TEXT,
+    },
     final_rating: {
       type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
+    check_rating: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
+    counter: {
+      type: DataTypes.INTEGER,
+      defaultValue: 1,
     },
   }, {
     sequelize,

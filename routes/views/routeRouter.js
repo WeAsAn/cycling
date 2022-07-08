@@ -15,6 +15,7 @@ routeRouter.get('/', async (req, res) => {
     order: [['final_rating', 'DESC']],
     include: [{ model: User }],
   });
+  // console.log(routes);
   //   const ng = User.login
   //   console.log(routes[0].User.login);
   //   console.log(user[0].login);
