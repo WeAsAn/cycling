@@ -19,6 +19,8 @@ userViewRouter.get('/login', (req, res) => {
   res.end(html);
 });
 
+module.exports = userViewRouter;
+
 userViewRouter.get('/route/new', (req, res) => {
   const { user } = req.session;
   const makeroute = React.createElement(MakeRoute, { user });

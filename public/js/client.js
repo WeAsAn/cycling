@@ -61,5 +61,32 @@ document.getElementsByName('deleteComment').addEventListener('click', async (eve
   });
   if (res.status === 'ok') {
     document.querySelector('.deleteComment').closest('.card-body').remove();
+console.log(document.mycomment);
+// const comm = document.mycomment
+// комментарий
+document.mycomment?.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  console.log(event.target.inputcomment.value);
+  console.log(event.target.querySelector('.nav-link').innerText);
+  console.log(event.target.rating.value);
+  console.log(event.target.getAttribute('id'));
+  const res = await fetch(`/new/addcomment`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      // user_id: event.target.querySelector('.nav-link').innerText,
+      roure_id: event.target.getAttribute('id'),
+      comment: event.target.inputcomment.value,
+      rating: event.target.rating.value,
+    }),
+  });
+  const result = await res.json();
+  console.log(result);
+  if (result.status === 'ok') {
+    window.location.assign(`/routes/${event.target.getAttribute('id')}`);
+  } else {
+    document.querySelector('.errorMessage').innerText = result.errorMessage;
   }
 });

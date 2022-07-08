@@ -1,7 +1,7 @@
 const userRouter = require('express').Router();
 const bcrypt = require('bcrypt');
 const { Router } = require('express');
-const { User, Route } = require('../../db/models');
+const { User, Route, Comment } = require('../../db/models');
 
 userRouter.post('/registration', async (req, res) => {
   try {
@@ -73,5 +73,18 @@ userRouter.post('/route', async (req, res) => {
   });
   res.json({ status: 'vse ok' });
 });
+
+userRouter.post('/addcomment', async (req, res) => {
+  console.log(req.body);
+  const { roure_id, comment, rating } = req.body;
+  await Comment.create({
+    user_id: req.session.user.id,
+    roure_id, 
+    comment, 
+    rating,
+  });
+  res.json({ status: 'ok' });
+});
+
 
 module.exports = userRouter;
