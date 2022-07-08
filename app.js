@@ -47,7 +47,7 @@ app.use('/new', userRouter);
 app.use('/', userViewRouter);
 app.use('/profile', profileRouter);
 app.use('/routes', routeRouter);
-app.use('/routes/comment/', CommentRouter);
+app.use('/routes/comment/', CommentRouter)
 
 app.listen(PORT, () => {
   console.log(`Сервер работает на ${PORT} порту`);
