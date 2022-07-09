@@ -110,10 +110,10 @@ function init() {
   document.newmap.addEventListener('submit', async (event) => {
     event.preventDefault();
     cords = multiRoute.properties._data.waypoints.map((obj) => obj.coordinates);
-    const mapURL = `https://yandex.ru/maps/?rtext=${cords
-      .map((arr) => arr.reverse().join(','))
-      .join('~')}&rtt=bc`;
-    console.log(mapURL);
+    // const mapURL = `https://yandex.ru/maps/?rtext=${cords
+    //   .map((arr) => arr.reverse().join(','))
+    //   .join('~')}&rtt=bc`;
+    // console.log(mapURL);
     console.log(cords);
     const result = await fetch('/new/route', {
       method: 'POST',
@@ -125,13 +125,13 @@ function init() {
         about: event.target.info.value,
         length,
         city: event.target.city.value,
-        start_point: mapURL,
+        start_poin: cords,
       }),
     });
     const res = await result.json();
     console.log(res);
     if (res.status === 'vse ok') {
-      window.location = '/routes';
+      window.location = '/home';
     }
   });
   // myMap.behaviors.disable('drag'); убрать движение

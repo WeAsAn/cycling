@@ -20,11 +20,11 @@ module.exports = function Profile({ user, routes }) {
           <div>
             <h3>Мои маршруты: </h3>
             <ul>
-              {routes.map((route) => <li><a href={`/routes/${route.id}`}>{route.name}</a></li>)}
+              {routes.map((route) => <li><a href={`/route/${route.id}`}>{route.name}</a></li>)}
             </ul>
           </div>
           <h1 />
-          <h3><a href="/routes/new">Добавить маршрут</a></h3>
+          <h3><a href="/route/new">Добавить маршрут</a></h3>
         </div>
       </div>
     </Layout>

@@ -8,9 +8,7 @@ module.exports = function Route({ routes, user }) {
     <Layout user={user}>
       { routes.map((el) => (
         <div className="card" key={el.id}>
-          <div className="card-header">
-            <a href={el.start_point}>Открыть маршрут</a>
-          </div>
+          <div className="card-header" />
           <div className="card-body">
             <h5 className="card-title">
               {el.name}
