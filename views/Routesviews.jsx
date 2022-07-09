@@ -1,3 +1,4 @@
+const e = require('express');
 const React = require('react');
 const { route } = require('../routes/views');
 const Layout = require('./Layout');
@@ -30,7 +31,7 @@ module.exports = function Route({ routes, user }) {
             <p className="card-text">
               Рейтинг:
               {' '}
-              {el.final_rating}
+              {(el.check_rating) / el.counter}
             </p>
             <p className="card-text">
               Автор маршрута:
