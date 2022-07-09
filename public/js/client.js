@@ -54,15 +54,14 @@ document.getElementsByName('deleteComment').forEach((btn) => {
   btn.addEventListener('click', async (event) => {
     const { id } = btn;
     event.preventDefault();
-    const res = await fetch(`/routes/${id}`, {
+    const res = await fetch(`/routes/comment/${id}`, {
       method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
     });
-    if (res.status === 'ok') {
-      btn.closest('.card-body').remove();
+    console.log(res);
+    if (res.status === 204) {
       console.log(btn.closest('.card-body'));
+      btn.closest('.card-body').remove();
+      // console.log(btn.closest('.card-body'));
     }
     // const comm = document.mycomment
     // комментарий

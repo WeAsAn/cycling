@@ -2,7 +2,7 @@ const CommentRouter = require('express').Router();
 const { logPlugin } = require('@babel/preset-env/lib/debug');
 const React = require('react');
 const ReactDOMServer = require('react-dom/server');
-const Comment = require('../../views/Comment');
+const { Comment } = require('../../db/models');
 
 CommentRouter.get('/:id', (req, res) => {
   const { user } = req.session;
@@ -22,6 +22,7 @@ CommentRouter.delete('/:id', async (req, res) => {
     await Comment.destroy({ where: { id: user_id } });
     res.status(204).json({ status: 'ok' });
   } catch (err) {
+    console.log(err);
     res.status(500).json({ errorText: 'not today' });
   }
 });
