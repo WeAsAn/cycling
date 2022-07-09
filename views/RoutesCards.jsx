@@ -42,9 +42,9 @@ module.exports = function RoutesCard({ routeid, comments, user }) {
               {routeid.about}
             </p>
             <a href="/routes/" className="btn btn-outline-dark">Назад</a>
-            {user && user
-              ? (<a href={`/routes/comment/${routeid.id}`} className="btn btn-outline-dark">Оставить комментарий</a>)
-              : (<></>)}
+            {user && user ? 
+            (<a href={`/routes/comment/${routeid.id}`} className="btn btn-outline-dark">Оставить комментарий</a>)
+            : (<></>)}
           </div>
         </div>
       </div>
@@ -71,7 +71,7 @@ module.exports = function RoutesCard({ routeid, comments, user }) {
                 {el.comment}
               </p>
               <br />
-              <button className="btn btn-outline-dark" name="deleteComment" id={routeid.id}>Удалить</button>
+                  <button className="btn btn-outline-dark" name='deleteComment'>Удалить</button>
             </div>
           ))
 }
