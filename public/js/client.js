@@ -50,20 +50,38 @@ document.login?.addEventListener('submit', async (event) => {
     document.querySelector('.errorMessage').innerText = result.errorMessage;
   }
 });
-
-document.getElementsByName('deleteComment').addEventListener('click', async (event) => {
-  event.preventDefault();
-  const res = await fetch('/routes/:id', {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+document.getElementsByName('deleteComment').forEach((btn) => {
+  btn.addEventListener('click', async (event) => {
+    const { id } = btn;
+    event.preventDefault();
+    const res = await fetch(`/routes/comment/${id}`, {
+      method: 'DELETE',
+    });
+    console.log(res);
+    if (res.status === 204) {
+      console.log(btn.closest('.card-body'));
+      btn.closest('.card-body').remove();
+      // console.log(btn.closest('.card-body'));
+    }
+    // const comm = document.mycomment
+    // комментарий
   });
-  if (res.status === 'ok') {
-    document.querySelector('.deleteComment').closest('.card-body').remove();
-console.log(document.mycomment);
-// const comm = document.mycomment
-// комментарий
+});
+// document.getElementByName('deleteComment').addEventListener('click', async (event) => {
+//   event.preventDefault();
+//   const res = await fetch('/routes/:id', {
+//     method: 'DELETE',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//   });
+//   if (res.status === 'ok') {
+//     document.querySelector('.deleteComment').closest('.card-body').remove();
+//   }
+//   console.log(document.mycomment);
+//   // const comm = document.mycomment
+//   // комментарий
+// });
 document.mycomment?.addEventListener('submit', async (event) => {
   event.preventDefault();
   console.log(event.target.inputcomment.value);
